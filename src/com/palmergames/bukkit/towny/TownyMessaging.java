@@ -92,7 +92,7 @@ public class TownyMessaging {
 			if (toSend instanceof ConsoleCommandSender) {
 				toSend.sendMessage(Translatable.of("default_towny_prefix").stripColors(true).defaultLocale() + Colors.strip(msg));
 			} else {
-				toSend.sendMessage(Translation.of("default_towny_prefix") + ChatColor.RED + msg);
+				Towny.getAdventure().sender(toSend).sendMessage(Translatable.of("default_towny_prefix").append("<red>" + msg).componentFor(toSend));
 			}
 		} else {
 			sendErrorMsg("Sender cannot be null!");
@@ -142,13 +142,8 @@ public class TownyMessaging {
 		if (sender == null || msg.isEmpty())
 			return;
 		
-		if (sender instanceof Player p) {
-			p.sendMessage(Translatable.of("default_towny_prefix").forLocale(p) + ChatColor.GREEN + msg);
-		} else if (sender instanceof ConsoleCommandSender) {
-			sender.sendMessage(Translatable.of("default_towny_prefix").stripColors(true).defaultLocale() + Colors.strip(msg));
-		} else {
-			sender.sendMessage(Translatable.of("default_towny_prefix").forLocale(sender) + ChatColor.GREEN + msg);
-		}
+		Audience audience = Towny.getAdventure().sender(sender);
+		audience.sendMessage(Translatable.of("default_towny_prefix").append("<dark_green>" + msg).stripColors(sender instanceof ConsoleCommandSender).componentFor(sender));
 		
 		sendDevMsg(msg);
 	}
@@ -170,18 +165,15 @@ public class TownyMessaging {
 	 * @param msg the message to be sent
 	 */
 	public static void sendDevMsg(String msg) {
-		if (TownySettings.isDevMode()) {
-			Player townyDev = BukkitTools.getPlayer(TownySettings.getDevName());
-			if (townyDev != null)
-				townyDev.sendMessage(Translatable.of("default_towny_prefix").forLocale(townyDev) + " DevMode: " + ChatColor.RED + msg);
-		}
+		if (TownySettings.isDevMode())
+			sendDevMsg(TownyComponents.miniMessage(msg));
 	}
 	
 	public static void sendDevMsg(Component message) {
 		if (TownySettings.isDevMode()) {
 			Player townyDev = BukkitTools.getPlayer(TownySettings.getDevName());
 			if (townyDev != null)
-				Towny.getAdventure().player(townyDev).sendMessage(Translatable.of("default_towny_prefix").locale(townyDev).append("DevMode: ").component().append(message.color(NamedTextColor.RED)));
+				Towny.getAdventure().player(townyDev).sendMessage(Translatable.of("default_towny_prefix").append("DevMode: ").append(message.color(NamedTextColor.RED)).componentFor(townyDev));
 		}
 	}
 
