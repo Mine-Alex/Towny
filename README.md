@@ -61,10 +61,6 @@ Here on GitHub's [Issue Tracker](https://github.com/TownyAdvanced/Towny/issues) 
 
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/TownyAdvanced/Towny.svg)](http://isitmaintained.com/project/TownyAdvanced/Towny "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/TownyAdvanced/Towny.svg)](http://isitmaintained.com/project/TownyAdvanced/Towny "Percentage of issues still open")
 
-If you still need help, join us on the [Discord server]( https://discord.gg/gnpVs5m ), where you can find cutting edge updates and discussion on the development of the plugin.
-
-If you want to support the developer consider [becoming a Sponsor](https://github.com/sponsors/LlmDl).
-
 ___
 
 ### Video Tutorials
